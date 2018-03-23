@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Frontend Development Milestone Project</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+</head>
+
+<body>
+    <!-- <ul class="places-for-choices">
+        <li class="place_point"><i class="fa fa-times"></i> Tourist attractions</li>
+        <li class="place_point"><i class="fa fa-times"></i> Accommodation</li>
+        <li class="place_point"><i class="fa fa-times"></i> Bars and Restaurants</li>
+    </ul>
+    -->
+
+    <form>
+        <div>
+            <input onclick="search()" type="radio" id="filterChoice1" name="filter" value="1">
+            <label for="contactChoice1">Tourist attractions</label>
+
+            <input onclick="search()" type="radio" id="filterChoice2" name="filter" value="2">
+            <label for="contactChoice2">Accommodation</label>
+
+            <input onclick="search()" type="radio" id="filterChoice3" name="filter" value="3">
+            <label for="contactChoice3">Bars and Restaurants</label>
+        </div>
+    </form>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+
+    <div id="map"></div>
+    <div id="top-rated"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script> 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADEEcu6bnkPRFbO1Q9iIwji2Xi33QquD4&libraries=places,geometry&callback=initMap" async defer></script>
+</body>
+
+</html>
