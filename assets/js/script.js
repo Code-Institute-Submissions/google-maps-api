@@ -1,17 +1,34 @@
-var map, geocoder, service, request, image, infowindow;
+var map, geocoder, service, request, image, infowindow, searchBox, topRated;
 var markers = [];
+var rating = [];
+var arrPlaces = [];
+var lodging = [];
+var bars = [];
+var museum = [];
 
 function initMap() {
     geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
-        zoom: 8
+        zoom: 13
     });
 
     infowindow = new google.maps.InfoWindow();
-
     currentPosition();
-    searchBox();
+    searchBoxF();
+}
+
+// Clear Markers
+function clearOverlay() {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers.length = 0;
+
+    lodging = [];
+    bars = [];
+    museum = [];
+
 }
 
 // Set current position on page load
@@ -24,7 +41,7 @@ function currentPosition() {
                 };
 
                 map.setCenter(pos);
-
+                search(pos);
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
             },
@@ -38,20 +55,31 @@ function currentPosition() {
     //console.log(navigator.geolocation.clearWatch(pos));
 }
 
-// Clear Markers
-function clearOverlay() {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-    }
-    markers.length = 0;
+// Headings for Recommended places
+function headings(places) {
+    $('#pop-places-bars').html('');
+    $('#pop-places-lodging').html('');
+    $('#pop-places-museum').html('');
+
+    $('#pop-places-bars').append(`<h2>Popular Bars in ${places[0].name}</h2>`);
+    $('#pop-places-lodging').append(`<h2>Popular Lodgings in ${places[0].name}</h2>`);
+    setTimeout(function() {
+        $('#pop-places-museum').append(`<h2>Popular Museums in ${places[0].name}</h2>`);
+    }, 100);
 }
 
-function searchBox() {
+function searchBoxF() {
     var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
+    searchBox = new google.maps.places.SearchBox(input);
     var placeId;
 
-    // Listen for the event fired when the user selects a prediction and retrieve more details for that place.
+    searchBoxAddListener(input, searchBox);
+
+}
+
+// Related to searchBoxF()
+// Listen for the event fired when the user selects a prediction and retrieve more details for that place.
+function searchBoxAddListener(input, searchBox) {
     searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
         placeId = places[0].place_id;
@@ -64,119 +92,142 @@ function searchBox() {
             return;
         }
 
+        search(pos);
         clearOverlay();
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
 
-        places.forEach(function(place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-            service = new google.maps.places.PlacesService(map);
-            service.nearbySearch({ location: pos, radius: 500 }, callback);
+        placesForEach(places, pos, bounds);
 
-            function callback(results, status) {
-                var arrPlaces = [];
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-
-                    var count = 0;
-                    for (var i = 0; i < results.length; i++) {
-                        if (results[i].photos == undefined) { count++; continue; }
-                        var place = results[i];
-                        arrPlaces += results[i];
-                        if (i < 4 + count) {
-                            createRecomendationPlaces(results[i]);
-                        }
-                    }
-                }
-            }
-            var topRated;
-
-            function createRecomendationPlaces(place) {
-                var marker = new google.maps.Marker({
-                });
-
-                topRated = $('#top-rated').append(`<div class='top-rated-block'><img src="${place.photos[0].getUrl({maxWidth:200, maxHeight:200})}"><br>
-                    <br><h3>${place.name}<br></h3><p>${place.vicinity}</p></div>`);
-                //  topRated;
-                markers.push(marker);
-
-                searchBox.addListener('places_changed', function() {
-                    // infowindow.open(map, marker);
-                    // $('#top-rated').append(`<p>Very Interestin Place<br></p>`);
-                    topRated.empty();
-                });
-
-            }
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                title: place.name,
-                position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            }
-            else {
-                bounds.extend(place.geometry.location);
-            }
-
-        });
         map.fitBounds(bounds);
 
-    });
+        setTimeout(function() {
+            sortByRating();
+        }, 1000);
 
+        // Headings for Recommended places
+        headings(places);
+
+    });
 }
 
-function search() {
-    var type = parseInt($("input[name='filter']:checked").val());
+// Related to searchBoxF() -> searchBoxAddListener(input, searchBox)
+// For each place, get the icon, name and location.
+function placesForEach(places, pos, bounds) {
+    places.forEach(function(place) {
+        if (!place.geometry) {
+            console.log("Returned place contains no geometry");
+            return;
+        }
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({ location: pos, radius: 50000, type: ['bar'] }, nearbySearchCallback);
+        service.nearbySearch({ location: pos, radius: 50000, type: ['lodging'] }, nearbySearchCallback);
+        service.nearbySearch({ location: pos, radius: 50000, type: ['museum'] }, nearbySearchCallback);
+        createMarker(place);
 
-    request = {
-        location: map.getCenter(),
-        radius: 1000,
-        type: []
-    };
+        if (place.geometry.viewport) {
+            // Only geocodes have viewport.
+            bounds.union(place.geometry.viewport);
+        }
+        else {
+            bounds.extend(place.geometry.location);
+        }
 
-    switch (type) {
-        case 1: //Tourist attractions
-            request.type = "point_of_interest";
-            image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+    });
+}
 
-            break;
-        case 2: //Accommodation
-            request.type = "hotels";
-            image = '';
-            break;
-        case 3: //Bars and Restaurants
-            request.type = "bar";
-            image = '';
-            break;
-        default:
-            image = '';
-            break;
+// Related to searchBoxF() -> searchBoxAddListener(input, searchBox) -> placesForEach(places, pos, bounds, searchBox)
+function nearbySearchCallback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+        for (var i = 0; i < results.length; i++) {
+            if (results[i].photos == undefined) { continue; }
+            if (results[i].rating == undefined) { continue; }
+            for (var j = 0; j < results[i].types.length; j++) {
+                if (results[i].types[j] === 'lodging') {
+                    lodging.push(results[i]);
+                }
+                else if (results[i].types[j] === 'bar') {
+                    bars.push(results[i]);
+                }
+                else if (results[i].types[j] === 'museum') {
+                    museum.push(results[i]);
+                }
+            }
+        }
+    }
+}
+
+function sortByRating() {
+
+    lodging.sort(function(a, b) {
+        return b.rating - a.rating;
+    });
+    bars.sort(function(a, b) {
+        return b.rating - a.rating;
+    });
+    museum.sort(function(a, b) {
+        return b.rating - a.rating;
+    });
+    for (var i = 0; i < 4; i++) {
+        createRecomendationPlaces(bars[i], lodging[i], museum[i]);
     }
 
+    clickClass();
+}
+
+
+// Related to searchBoxF() -> searchBoxAddListener(input, searchBox) -> placesForEach(places, pos, bounds, searchBox) -> nearbySearchCallback(results, status)
+function createRecomendationPlaces(recomBars, recomLodging, recomMuseum) {
+    marker = new google.maps.Marker({});
+
+    topRated = $('#pop-places-bars').append(`<div class='top-rated-block' id="${recomBars.place_id}"><img src="${recomBars.photos[0].getUrl({maxWidth:400, maxHeight:400})}"><br><h3>${recomBars.name}<br></h3></div>`);
+
+    topRated = $('#pop-places-lodging').append(`<div class='top-rated-block' id="${recomLodging.place_id}"><img src="${recomLodging.photos[0].getUrl({maxWidth:200, maxHeight:200})}"><br><h3>${recomLodging.name}<br></h3></div>`);
+
+    topRated = $('#pop-places-museum').append(`<div class='top-rated-block' id="${recomMuseum.place_id}"><img src="${recomMuseum.photos[0].getUrl({maxWidth:200, maxHeight:200})}"><br><h3>${recomMuseum.name}<br></h3></div>`);
+
+    markers.push(marker);
+
+    searchBox.addListener('places_changed', function() {
+        // infowindow.open(map, marker);
+        // $('#top-rated').append(`<p>Very Interestin Place<br></p>`);
+        topRated.empty();
+    });
+}
+
+// nearby search showed on map with marker
+function search(pos) {
+    $('#filter').on('change', function() {
+        var thisVal = $('#filter').val();
+        request.type = thisVal;
+
+        service.nearbySearch(request, callback);
+    });
+
+    request = {
+        location: pos,
+        radius: 1000,
+        type: ['amusement_park']
+    };
 
     service = new google.maps.places.PlacesService(map);
     service.nearbySearch(request, callback);
+
 }
 
+// Related to search(pos)
 function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         clearOverlay();
         for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
         }
-
-
     }
 }
 
+// Related to search(pos)
 function createMarker(place) {
     var marker = new google.maps.Marker({
         map: map,
@@ -225,4 +276,48 @@ function createMarker(place) {
         infowindow.setContent(`${ifPhoto()}${place.name} <br>${place.vicinity}<br> ${openingHours()}${ifRating('Raiting: ')}`);
         infowindow.open(map, this);
     });
+}
+
+// Additional Info for Popular Place -> Aside
+function clickClass() {
+    $('.top-rated-block').click(function() {
+        $('#place-info').html('');
+
+        var thisPlaceId = $(this).attr('id');
+
+        service.getDetails({ placeId: thisPlaceId }, callback);
+
+        function callback(place, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                placeAddress = {
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng()
+                };
+                place = place;
+
+                $('#place-info').append(`<div class="img-container"><img src='${place.photos[0].getUrl({maxWidth:500, maxHeight:500})}'></div><div class="content-wrapper"><h2>${place.name}</h2><br><button type="button" class="btn btn-primary btn-xs" onclick="clickBtn()">Show location on the map</button><br><span>${place.formatted_address}</span><br><span>${place.international_phone_number}</span><br><span>${place.rating}</span></div>`);
+            }
+            else {
+                alert('Something wrong');
+            }
+        }
+
+    });
+}
+
+var placeAddress;
+var place;
+
+function clickBtn() {
+    clearOverlay();
+    var marker = new google.maps.Marker({
+        position: placeAddress,
+        map: map
+    });
+    map.setCenter(placeAddress);
+    window.setTimeout(function() {
+        map.panTo(marker.getPosition());
+    }, 500);
+
+    markers.push(marker);
 }

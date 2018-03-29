@@ -3,6 +3,7 @@
 
 #map {
      height: 70%;
+     width: 70%;
 }
 
 /* Optional: Makes the sample page fill the window. */
@@ -32,31 +33,22 @@ body {
      display: inline;
 }
 
-.pac-card {
-     margin: 10px 10px 0 0;
-     border-radius: 2px 0 0 2px;
-     box-sizing: border-box;
-     -moz-box-sizing: border-box;
-     outline: none;
-     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-     background-color: #fff;
-     font-family: Roboto;
+#title {
+     color: #fff;
+     background-color: #4d90fe;
+     font-size: 25px;
+     font-weight: 500;
+     padding: 6px 12px;
 }
 
-#pac-container {
-     padding-bottom: 12px;
-     margin-right: 12px;
+#target {
+     width: 345px;
 }
 
-.pac-controls {
-     display: inline-block;
-     padding: 5px 11px;
-}
+/* Header */
 
-.pac-controls label {
-     font-family: Roboto;
-     font-size: 13px;
-     font-weight: 300;
+header {
+     padding: 15px 5px;
 }
 
 #pac-input {
@@ -74,22 +66,15 @@ body {
      border-color: #4d90fe;
 }
 
-#title {
-     color: #fff;
-     background-color: #4d90fe;
-     font-size: 25px;
-     font-weight: 500;
-     padding: 6px 12px;
-}
-
-#target {
-     width: 345px;
+form {
+     display: inline-block;
 }
 
 
 /*Top rated*/
+
 #top-rated {
-   text-align: center;  
+     text-align: center;
 }
 
 .top-rated-block {
@@ -102,4 +87,28 @@ body {
      width: auto;
      height: auto;
      max-height: 120px;
+}
+
+.pop-container-info {
+     text-align: center;
+}
+
+/* Aside Block */
+
+#place-info {
+     width: 30%;
+     height: 70%;
+     position: absolute;
+     right: 0;
+     top: 55px;
+}
+
+.img-container {
+     overflow: hidden;
+     height: 350px;
+}
+
+.img-container>img {
+     height: 100%;
+     width: auto;
 }
