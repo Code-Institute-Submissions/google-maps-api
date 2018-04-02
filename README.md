@@ -1,18 +1,30 @@
+# Single Page Application
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+Web page allow users to search for their holiday destination.
+
+### Solved Assigned Tasks 
+
+1. Select a destination city
+2. Find tourist attractions, accommodation, bars, and restaurants
+3. Show most popular places of current location
+4. Get more information about a chosen place
+
+## Functionality
+
+The website tested for errors that directly may be affected visitors and deployed to [Github Pages](https://madenden.github.io/google-maps-api/).
 
 
-Hi there! Welcome to Cloud9 IDE!
+### Built With 
 
-To get you started, create some files, play with the terminal,
-or visit http://docs.c9.io for our documentation.
-If you want, you can also go watch some training videos at
-http://www.youtube.com/user/c9ide.
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript/)
+* [Google Places API](https://developers.google.com/places/javascript/)
+* [Bootstrap](https://getbootstrap.com/docs/3.3/) - Version 3.3.7
+* [jQuery](http://fancyapps.com/fancybox/3/) - Version 3.3.1
+    
 
-Happy coding!
-The Cloud9 IDE team
+
+## Authors
+
+* **Deniss Matvejevs** - *Design and developing* 
+
+

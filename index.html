@@ -1,22 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Frontend Development Milestone Project</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Maps</title>
 </head>
 
 <body>
+
     <header>
         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
         <form>
+            <span>Show places by category: </span>
             <select name="filter" id="filter">
-            <option class="filter-option" value="amusement_park" selected>Amusement park</option>
+            <option class="filter-option" value="" selected>Choose one</option>
+            <option class="filter-option" value="amusement_park">Amusement park</option>
             <option class="filter-option" value="aquarium">Aquarium</option>
             <option class="filter-option" value="art_gallery">Art gallery</option>
             <option class="filter-option" value="museum">Museum</option>
@@ -29,22 +32,40 @@
         </form>
     </header>
 
-
     <div id="map"></div>
-    <div id="place-info"></div>
-
-    <div id="pop-places-bars" class="pop-container-info">
-    </div>
-    <div id="pop-places-lodging" class="pop-container-info">
-    </div>
-    <div id="pop-places-museum" class="pop-container-info">
-    </div>
-
+    <aside id="place-info"></aside>
+    <footer id="footer">
+        <div id="cities">
+            <h1>Popular Destinations</h1>
+            <div class="cities-card" value="41.385064,2.173403">
+                <div class="cities-img"><img src="assets/img/barcelona.jpg" alt="Barcelona"></div>
+                <div class="cities">
+                    <h2>Barcelona</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolore doloribus eius iure laudantium nihil porro quasi quos voluptate!</p>
+                </div>
+            </div>
+            <div class="cities-card" value="51.507351,-0.127758">
+                <div class="cities-img"><img src="assets/img/london.jpg" alt="London"></div>
+                <div class="cities">
+                    <h2>London</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ducimus ea eligendi ipsam libero nostrum nulla quisquam repellendus repudiandae veritatis!</p>
+                </div>
+            </div>
+            <div class="cities-card" value="52.520007,13.404954">
+                <div class="cities-img"><img src="assets/img/berlin.jpg" alt="Berlin"></div>
+                <div class="cities">
+                    <h2>Berlin</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolore, dolorum. Eius enim odit optio quos repellendus sequi soluta tenetur.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADEEcu6bnkPRFbO1Q9iIwji2Xi33QquD4&libraries=places,geometry&callback=initMap" async defer></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
