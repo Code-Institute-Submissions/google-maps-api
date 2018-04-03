@@ -256,7 +256,7 @@ function asideSlider(place) {
         $('.aside-img').attr('src', place.photos[i].getUrl({ maxWidth: 500, maxHeight: 500 }));
     });
     $('.fa-chevron-left').click(function() {
-        if (i < 0) i = place.photos.length;
+        if (i <= 0) i = place.photos.length;
         i--;
         $('.aside-img').attr('src', place.photos[i].getUrl({ maxWidth: 500, maxHeight: 500 }));
     });

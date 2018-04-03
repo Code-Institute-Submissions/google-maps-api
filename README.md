@@ -19,7 +19,7 @@ The website tested for errors that directly may be affected visitors and deploye
 * [Google Maps API](https://developers.google.com/maps/documentation/javascript/)
 * [Google Places API](https://developers.google.com/places/javascript/)
 * [Bootstrap](https://getbootstrap.com/docs/3.3/) - Version 3.3.7
-* [jQuery](http://fancyapps.com/fancybox/3/) - Version 3.3.1
+* [jQuery](https://jquery.com/) - Version 3.3.1
     
 
 
