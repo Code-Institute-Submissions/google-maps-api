@@ -16,7 +16,7 @@ Web page allow users to search for their holiday destination.
 
 ## Functionality
 
-The website tested for errors that directly may be affected visitors and deployed to [Github Pages](https://madenden.github.io/google-maps-api/).
+The website tested for mobile version and errors that directly may be affected visitors and deployed to [Github Pages](https://madenden.github.io/google-maps-api/).
 
 
 ### Built With 
