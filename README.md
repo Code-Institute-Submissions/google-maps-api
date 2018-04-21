@@ -30,6 +30,6 @@ The website tested for mobile version and errors that directly may be affected v
 
 ## Authors
 
-* **Deniss Matvejevs** - *Design and developing* 
+* **Deniss Matvejevs** - *Design and develop* 
 
 
