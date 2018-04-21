@@ -12,31 +12,48 @@
 </head>
 
 <body>
-
     <header>
         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        <form>
+        <form id="filterForFun">
+            <!-- REMOVE options-->
             <span>Show places by category: </span>
+            <br>
             <select name="filter" id="filter">
-            <option class="filter-option" value="" selected>Choose one</option>
+            <option class="filter-option blank-option" value="blank" selected>Choose one</option>
             <option class="filter-option" value="amusement_park">Amusement park</option>
             <option class="filter-option" value="aquarium">Aquarium</option>
             <option class="filter-option" value="art_gallery">Art gallery</option>
             <option class="filter-option" value="museum">Museum</option>
             <option class="filter-option" value="zoo">Zoo</option>
-            <option class="filter-option" value="bar">Bar</option>
-            <option class="filter-option" value="cafe">Cafe</option>
-            <option class="filter-option" value="restaurant">Restaurant</option>
-            <option class="filter-option" value="lodging">Lodging</option>
         </select>
         </form>
     </header>
-
+    <div class="overlay"></div>
     <div id="map"></div>
+    <aside id="additional-menu">
+        <div class="slide-left-aside-btn inside"></div>
+        <div id="saved-places">
+            <span><i class="glyphicon glyphicon-heart-empty heart-span"></i>Saved places</span>
+        </div>
+        <form action="" id="checkboxToEat">
+            <div class="checkbox-container">
+                <input class="placeToEat" type="checkbox" id="restaurant" name="typeOfPlace" value="restaurant">
+                <label for="restaurant" class="label">Where to Eat</label>
+            </div>
+            <br>
+            <div class="checkbox-container">
+                <input class="placeToEat" type="checkbox" id="lodging" name="typeOfPlace" value="lodging">
+                <label for="lodging" class="label">Hotels</label>
+            </div>
+        </form>
+        <div id="saved-places-list"></div>
+    </aside>
+    <div class="slide-left-aside-btn outside"></div>
+
     <aside id="place-info"></aside>
     <footer id="footer">
         <div id="cities">
-            <h1>Popular Destinations</h1>
+            <h1>Offers to Visit</h1>
             <div class="cities-card" value="41.385064,2.173403">
                 <div class="cities-img"><img src="assets/img/barcelona.jpg" alt="Barcelona"></div>
                 <div class="cities">
@@ -63,9 +80,9 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADEEcu6bnkPRFbO1Q9iIwji2Xi33QquD4&libraries=places,geometry&callback=initMap" async defer></script>
-    <script src="assets/js/script.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
 </html>

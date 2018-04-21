@@ -5,9 +5,14 @@ Web page allow users to search for their holiday destination.
 ### Solved Assigned Tasks 
 
 1. Select a destination city
-2. Find tourist attractions, accommodation, bars, and restaurants
-3. Show most popular places of current location
-4. Get more information about a chosen place
+2. Show recommended cities for journey
+2. Filter for tourist attractions
+3. Find accomodations or places to have a lunch
+4. Show most popular places of current location
+5. Get more information about a chosen place
+6. Show more information from infoWindows
+7. Save liked place in localStorage
+8. Clear localStorage
 
 ## Functionality
 

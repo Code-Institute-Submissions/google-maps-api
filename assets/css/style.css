@@ -10,10 +10,20 @@ body {
      width: 100%;
 }
 
+#filterForFun br {
+     display: none;
+}
+
+.left-pos-saved-places,
+.br-before-saved-places {
+     display: none;
+}
+
 /* Header */
 
 header {
-     padding: 15px 5px;
+     padding: 20px 5px;
+     text-align: center;
 }
 
 form {
@@ -22,7 +32,74 @@ form {
 }
 
 #pac-input {
-     width: 300px;
+     width: 260px;
+     height: 34px;
+     border-radius: 28px;
+     border: 1px solid #ccc;
+     padding-left: 20px;
+}
+
+#localStorage {
+     display: none;
+}
+
+/* Drop Down */
+
+#saved-places {
+     display: none;
+     position: absolute;
+     top: 300px;
+     z-index: 8;
+     left: 0;
+     -moz-border-radius: 28px;
+     -webkit-border-radius: 28px;
+     border-radius: 28px;
+     border: 1px solid #ccc;
+     padding: 6px 22px;
+     margin-left: 25px;
+     background-color: rgba(255, 255, 255, 0.9);
+}
+
+#saved-places:hover {
+     cursor: pointer;
+     background-color: #f4f7f9;
+}
+
+#saved-places-list {
+     display: none;
+     position: absolute;
+     top: 340px;
+     left: 25px;
+     z-index: 5;
+     width: 350px;
+     background-color: rgba(255, 255, 255, 0.8);
+}
+
+.saved-place {
+     padding: 10px 5px;
+}
+
+.saved-place:hover {
+     background-color: #eaeaea;
+     cursor: pointer;
+}
+
+.saved-place .glyphicon {
+     position: static;
+     color: #797979;
+}
+
+.saved-place .glyphicon:hover {
+     color: #ff0000;
+}
+
+.saved-place img {
+     width: 50px;
+     padding: 0 5px;
+}
+
+.heart-span {
+     margin-right: 5px;
 }
 
 /* Footer */
@@ -47,11 +124,6 @@ footer .row h2 {
      cursor: pointer;
 }
 
-.img-container {
-     overflow: hidden;
-     height: 230px;
-}
-
 /* Aside Block */
 
 #place-info {
@@ -59,23 +131,25 @@ footer .row h2 {
      height: 70%;
      position: absolute;
      right: 0;
-     top: 56px;
+     top: 74px;
      display: none;
 }
 
 .img-container {
      overflow: hidden;
-     height: 350px;
+     text-align: center;
+     max-height: 224px;
 }
 
-.img-container>img {
-     height: 100%;
-     width: auto;
+.img-container-aside {
+     max-height: 261px;
 }
+
+.img-container>img {}
 
 .fa {
      position: absolute;
-     top: 151px;
+     top: 110px;
      font-size: 2em;
      background-color: rgba(255, 255, 255, 0.8);
      border-radius: 50%;
@@ -105,6 +179,10 @@ footer .row h2 {
      margin-bottom: 5px;
 }
 
+.exit-btn-popup-form {
+     display: none;
+}
+
 /* Cities section */
 
 #cities {
@@ -129,5 +207,217 @@ footer .row h2 {
 
 .cities-img {
      overflow: hidden;
-     height: 300px;
+     width: 100%;
+}
+
+.cities-img img {
+     width: 100%;
+     height: auto;
+}
+
+/* CheckBox */
+
+#checkboxToEat {
+     width: 155px;
+     position: absolute;
+     top: 175px;
+}
+
+.checkbox-container {
+     width: 240px;
+     position: relative;
+     background-color: #fff;
+     height: 47px;
+}
+
+.checkbox-container label {
+     cursor: pointer;
+     font-weight: 400;
+     font-size: 1.1em;
+     color: #4a4a4a;
+     width: 100%;
+     height: 100%;
+     padding-top: 16px;
+     display: block;
+     text-align: left;
+}
+
+:root input[type=checkbox] {
+     position: absolute;
+     left: -1000em;
+}
+
+:root input[type=checkbox]+label:before {
+     content: "\f00c";
+     font-family: FontAwesome;
+     display: inline-block;
+     width: 16px;
+     height: 16px;
+     margin: 0 .5em 0 0;
+     position: relative;
+     bottom: 6px;
+     font-size: 1.6em;
+     vertical-align: middle;
+     padding-right: 25px;
+}
+
+:root input[type=checkbox]:checked+label:before {
+     color: blue;
+}
+
+#checkboxToEat div:last-child {
+     margin-top: -20px;
+     border-top: 1px solid #ccc;
+}
+
+/* Info Windows */
+
+.info-window {
+     line-height: 10px;
+}
+
+.info-window img {
+     margin-bottom: 10px;
+}
+
+.info-window-more-info {
+     cursor: pointer;
+     color: #008b8b;
+     font-weight: 500;
+}
+
+/* Aside Left */
+
+#additional-menu {
+     display: block;
+     background-color: transparent;
+}
+
+.overlay {
+     display: none;
+     height: 100%;
+     width: 100%;
+     position: fixed;
+     left: 0;
+     top: 0;
+     z-index: 10;
+     background-color: rgb(0, 0, 0);
+     background-color: rgba(0, 0, 0, 0.9);
+     overflow-x: hidden;
+     transition: 0.5s;
+}
+
+/** Media **/
+
+@media screen and (max-width: 1064px) {
+     #filterForFun {
+          text-align: center;
+     }
+     #filter {
+          margin-top: 5px;
+     }
+}
+
+@media screen and (max-width: 998px) {
+     .row-content {
+          width: 50%;
+     }
+     #place-info {
+          width: 50%;
+          height: 80%;
+          padding: 20px;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 12;
+          background-color: white;
+     }
+     .exit-btn-popup-form {
+          width: 60px;
+          height: 60px;
+          display: block;
+          position: absolute;
+          top: 0;
+          right: 0;
+     }
+     .exit-btn-popup-form img {
+          height: 100%;
+     }
+     .img-container-aside {
+          position: relative;
+     }
+     .wrapper-aside-content {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+     }
+}
+
+@media screen and (max-width: 799px) {
+     #place-info {
+          width: 70%;
+     }
+}
+
+@media screen and (max-width: 646px) {
+     #filterForFun {
+          display: block;
+          margin-left: 0;
+          margin-top: 5px;
+     }
+}
+
+@media screen and (max-width: 480px) {
+     #additional-menu {
+          display: none;
+          width: 300px;
+          height: 385px;
+          position: absolute;
+          top: 172px;
+          background-color: rgba(255, 255, 255, 0.9);
+     }
+     #checkboxToEat {
+          top: 25px;
+     }
+     #checkboxToEat .checkbox-container {
+          background-color: #e4e4e4;
+     }
+     #saved-places {
+          top: 145px;
+     }
+     #saved-places-list {
+          top: 193px;
+          width: 265px;
+     }
+     .slide-left-aside-btn {
+          width: 20px;
+          height: 50px;
+          background-color: #e74a36;
+          border-radius: 0 4px 4px 0;
+          -webkit-box-shadow: inset -2px 0 3px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: inset 2px 0 3px 0 rgba(0, 0, 0, 0.15)
+     }
+     .slide-left-aside-btn.outside {
+          position: absolute;
+          top: 300px;
+     }
+     .slide-left-aside-btn.inside {
+          display: none;
+          position: absolute;
+          top: 128px;
+          right: -20px;
+     }
+     .cities-card {
+          display: block;
+          width: 100%;
+          margin: 0;
+     }
+     .row-content {
+          width: 100%;
+     }
+
+     #place-info {
+          width: 90%;
+     }
 }
