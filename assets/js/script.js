@@ -205,7 +205,7 @@ function createMarkerForRestaurant(result) {
     placeToEat.push(new google.maps.Marker({
         map: map,
         position: result.geometry.location,
-        icon: '/assets/img/location.png'
+        icon: 'assets/img/location.png'
     }));
 }
 
