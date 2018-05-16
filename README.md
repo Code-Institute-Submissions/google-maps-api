@@ -1,22 +1,23 @@
 # Single Page Application
 
-Web page allow users to search for their holiday destination.
+The web page allows users to search for a holiday destination.
 
 ### Solved Assigned Tasks 
 
 1. Select a destination city
-2. Show recommended cities for journey
-2. Filter for tourist attractions
-3. Find accomodations or places to have a lunch
-4. Show most popular places of current location
-5. Get more information about a chosen place
-6. Show more information from infoWindows
-7. Save liked place in localStorage
-8. Clear localStorage
+2. Show recommended cities for holiday
+3. Filter for tourist attractions
+4. Find accomodations or restaurants, cafe and bars
+5. Show most popular tourist attractions
+6. Get more information about a chosen place
+7. Show more information from infoWindows
+8. Save liked place in localStorage
+9. Clear localStorage
+
 
 ## Functionality
 
-The website tested for errors that directly may be affected visitors and deployed to [Github Pages](https://madenden.github.io/google-maps-api/).
+The website has been tested for mobile versions and for errors that may affect visitors and webpage deploys to [Github Pages](https://madenden.github.io/google-maps-api/).
 
 
 ### Built With 
@@ -30,6 +31,6 @@ The website tested for errors that directly may be affected visitors and deploye
 
 ## Authors
 
-* **Deniss Matvejevs** - *Design and developing* 
+* **Deniss Matvejevs** - *Design and develop* 
 
 
