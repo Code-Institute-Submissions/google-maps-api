@@ -124,7 +124,8 @@ function infoWindowForMarkers(place, arr) {
 
     // function check if preview photo exist or not
     function ifPhoto() {
-        let currentPhoto = (place.photos != undefined || place.photos != null) ? `<img src="${place.photos[0].getUrl({maxWidth:100, maxHeight:100})}">` : "";
+        let currentPhoto = (place.photos != undefined || place.photos != null) ?
+            `<img src="${place.photos[0].getUrl({maxWidth:100, maxHeight:100})}">` : "";
         return currentPhoto;
     }
 
@@ -203,7 +204,8 @@ function callbackHotels(results, status) {
 function createMarkerForRestaurant(result) {
     placeToEat.push(new google.maps.Marker({
         map: map,
-        position: result.geometry.location
+        position: result.geometry.location,
+        icon: '/assets/img/location.png'
     }));
 }
 
@@ -447,11 +449,12 @@ function dropDownLocalStorage() {
             let ltdLng = localStorage.getItem(localStorage.getItem(key) + ' - LtdLng');
             let image = localStorage.getItem(localStorage.getItem(key) + ' - image');
             let title = localStorage.getItem(key);
-            $('#saved-places-list').append(`<div class="saved-place" value="${ltdLng}"><i class="glyphicon glyphicon-remove"></i><img src="${image}" alt=""><span>${title}</span></div>`);
+            $('#saved-places-list').append(`<div class="saved-place" value="${ltdLng}">
+            <i class="glyphicon glyphicon-remove"></i><img src="${image}" alt=""><span>${title}</span></div>`);
         });
         $('#saved-places').css('display', 'inline-block');
     }
-    
+
     removeLocalStorageKey();
     getValueFromSavedPlaces();
 }
